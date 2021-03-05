@@ -33,7 +33,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
@@ -64,7 +63,7 @@ public class SlimeCustomizer extends JavaPlugin implements SlimefunAddon {
             new GitHubBuildsUpdater(this, getFile(), "NCBPFluffyBear/SlimeCustomizer/master/").start();
         }
 
-        final Metrics metrics = new Metrics(this, 9841);
+        new Metrics(this, 9841);
 
         /* File generation */
         final File categoriesFile = new File(getInstance().getDataFolder(), "categories.yml");
@@ -143,9 +142,14 @@ public class SlimeCustomizer extends JavaPlugin implements SlimefunAddon {
                 itemFile = new File(getInstance().getDataFolder().getPath() + "/saveditems", id + ".yml");
             }
 
-            if (!itemFile.createNewFile()) {
-                getInstance().getLogger().log(Level.SEVERE, "Failed to create config for item " + id);
-            }
+            try {
+				if (!itemFile.createNewFile()) {
+				    getInstance().getLogger().log(Level.SEVERE, "Failed to create config for item " + id);
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
             Config itemFileConfig = new Config(this, "saveditems/" + id + ".yml");
             itemFileConfig.setValue("item", p.getInventory().getItemInMainHand());

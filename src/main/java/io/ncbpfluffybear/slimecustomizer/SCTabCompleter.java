@@ -1,24 +1,23 @@
 package io.ncbpfluffybear.slimecustomizer;
 
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
-import io.ncbpfluffybear.slimecustomizer.objects.CustomGenerator;
-import io.ncbpfluffybear.slimecustomizer.objects.CustomMachine;
-import io.ncbpfluffybear.slimecustomizer.objects.CustomSCItem;
-import io.ncbpfluffybear.slimecustomizer.objects.WindowsExplorerStringComparator;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.cscorelib2.collections.Pair;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
+import io.ncbpfluffybear.slimecustomizer.objects.CustomGenerator;
+import io.ncbpfluffybear.slimecustomizer.objects.CustomMachine;
+import io.ncbpfluffybear.slimecustomizer.objects.CustomSCItem;
+import io.ncbpfluffybear.slimecustomizer.objects.WindowsExplorerStringComparator;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 
 /**
  * The {@link SCTabCompleter} serves as a {@link TabCompleter}

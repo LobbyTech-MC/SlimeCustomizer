@@ -1,20 +1,20 @@
 package io.ncbpfluffybear.slimecustomizer.registration;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
 import io.ncbpfluffybear.slimecustomizer.SlimeCustomizer;
 import io.ncbpfluffybear.slimecustomizer.Utils;
 import io.ncbpfluffybear.slimecustomizer.objects.CustomGenerator;
 import io.ncbpfluffybear.slimecustomizer.objects.SCMachine;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineFuel;
 import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
 
 /**
  * {@link Generators} registers the generators
