@@ -161,7 +161,7 @@ public class Generators {
 
             new CustomGenerator(category, generator.getMachineStack(),
                 generator.getRecipeType(), generator.getRecipe(),
-                generatorKey, generator.getProgressItem(), generator.getEnergyProduction(),
+                generator.getProgressItem(), generator.getEnergyProduction(),
                 generator.getEnergyBuffer(), customRecipe
             ).register(SlimeCustomizer.getInstance());
 

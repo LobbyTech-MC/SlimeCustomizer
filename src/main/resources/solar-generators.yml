@@ -1,19 +1,19 @@
 #READ THE WIKI BEFORE CREATING A MACHINE! https://github.com/NCBPFluffyBear/SlimeCustomizer/blob/master/README.md
-EXAMPLE_GENERATOR:
+EXAMPLE_SOLAR_GENERATOR:
   category: slime_customizer
-  generator-name: "&bExample Generator"
+  generator-name: "&bExample Solar Generator"
   generator-lore:
-  - "&7This is an example generator!"
-  block-type: SKULLe707c7f6c3a056a377d4120028405fdd09acfcd5ae804bfde0f653be866afe39
-  progress-bar-item: FLINT_AND_STEEL
+  - "&7This is an example solar generator!"
+  block-type: DAYLIGHT_DETECTOR
   stats:
-    energy-production: 16
-    energy-buffer: 64
+    energy-production:
+      day: 256
+      night: 128
   crafting-recipe-type: ENHANCED_CRAFTING_TABLE
   crafting-recipe:
     1:
       type: VANILLA
-      id: IRON_BLOCK
+      id: BEDROCK
       amount: 1
     2:
       type: NONE
@@ -21,7 +21,7 @@ EXAMPLE_GENERATOR:
       amount: 1
     3:
       type: VANILLA
-      id: IRON_BLOCK
+      id: BEDROCK
       amount: 1
     4:
       type: VANILLA
@@ -47,24 +47,3 @@ EXAMPLE_GENERATOR:
       type: VANILLA
       id: IRON_BLOCK
       amount: 1
-  recipes:
-    1:
-      time-in-seconds: 5
-      input:
-        type: VANILLA
-        id: SPRUCE_SIGN
-        amount: 1
-      output:
-        type: NONE
-        id: N/A
-        amount: N/A
-    2:
-      time-in-seconds: 10
-      input:
-        type: VANILLA
-        id: BEDROCK
-        amount: 1
-      output:
-        type: VANILLA
-        id: BIRCH_PLANKS
-        amount: 1

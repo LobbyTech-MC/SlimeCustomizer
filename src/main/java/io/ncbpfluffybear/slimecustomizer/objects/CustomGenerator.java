@@ -2,6 +2,9 @@ package io.ncbpfluffybear.slimecustomizer.objects;
 
 import dev.j3fftw.extrautils.utils.LoreBuilderDynamic;
 import dev.j3fftw.extrautils.utils.Utils;
+import io.github.thebusybiscuit.slimefun4.api.events.AsyncGeneratorProcessCompleteEvent;
+import io.github.thebusybiscuit.slimefun4.utils.ChestMenuUtils;
+import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Lists.RecipeType;
 import me.mrCookieSlime.Slimefun.Objects.Category;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.AGenerator;
@@ -10,11 +13,15 @@ import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 import me.mrCookieSlime.Slimefun.api.inventory.BlockMenu;
 import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * The {@link CustomGenerator} class is a generified
@@ -22,7 +29,7 @@ import java.util.List;
  *
  * @author NCBPFluffyBear
  */
-public class CustomGenerator extends AGenerator {
+public class CustomGenerator extends SCAGenerator {
 
     private final ItemStack progressItem;
     private final int energyProduction;
@@ -30,7 +37,7 @@ public class CustomGenerator extends AGenerator {
     private final List<MachineFuel> customRecipes;
 
     public CustomGenerator(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe,
-                           String id, Material progressItem, int energyProduction, int energyBuffer,
+                           Material progressItem, int energyProduction, int energyBuffer,
                            List<MachineFuel> customRecipes) {
         super(category, item, recipeType, recipe);
 
@@ -38,6 +45,8 @@ public class CustomGenerator extends AGenerator {
         this.energyProduction = energyProduction;
         this.energyBuffer = energyBuffer;
         this.customRecipes = customRecipes;
+
+        getMachineProcessor().setProgressBar(getProgressBar());
 
         // Gets called in AGenerator, but customRecipes is null at that time.
         registerDefaultFuelTypes();
@@ -91,5 +100,7 @@ public class CustomGenerator extends AGenerator {
 
         return displayRecipes;
     }
+
+
 
 }
