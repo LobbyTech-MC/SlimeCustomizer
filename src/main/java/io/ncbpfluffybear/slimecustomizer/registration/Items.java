@@ -24,6 +24,7 @@ import java.util.logging.Level;
 public class Items {
 
     public static boolean register(Config items) {
+    	if(items == null) {return false;}
         for (String itemKey : items.getKeys()) {
             if (itemKey.equals("EXAMPLE_ITEM")) {
                 SlimeCustomizer.getInstance().getLogger().log(Level.WARNING, "Your items.yml file still contains the example item! " +

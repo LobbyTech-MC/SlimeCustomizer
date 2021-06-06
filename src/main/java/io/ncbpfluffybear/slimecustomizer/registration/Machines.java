@@ -23,6 +23,7 @@ import java.util.logging.Level;
 public class Machines {
 
     public static boolean register(Config machines) {
+    	if(machines == null) {return false;}
         for (String machineKey : machines.getKeys()) {
             if (machineKey.equals("EXAMPLE_MACHINE")) {
                 SlimeCustomizer.getInstance().getLogger().log(Level.WARNING, "Your machines.yml file still contains " +

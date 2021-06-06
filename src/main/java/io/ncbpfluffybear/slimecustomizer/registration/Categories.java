@@ -21,6 +21,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class Categories {
 
     public static boolean register(Config categories) {
+    	if(categories == null) {return false;}
         if (categories.getKeys().isEmpty()) {
             Utils.disable("No categories were found! Please add and use a category from categories.yml");
             return false;

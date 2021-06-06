@@ -25,6 +25,7 @@ import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
 public class Generators {
 
     public static boolean register(Config generators) {
+    	if(generators == null) {return false;}
         for (String generatorKey : generators.getKeys()) {
             if (generatorKey.equals("EXAMPLE_GENERATOR")) {
                 SlimeCustomizer.getInstance().getLogger().log(Level.WARNING, "Your generators.yml file still contains" +
