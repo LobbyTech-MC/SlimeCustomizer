@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.ncbpfluffybear</groupId>
     <artifactId>SlimeCustomizer</artifactId>
-    <version>1.0.0</version>
+    <version>zh_CN(LobbyTech)</version>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
@@ -36,7 +36,7 @@
     </repositories>
 
     <build>
-        <finalName>${project.name} v${project.version}</finalName>
+        <finalName>[Slimefun]${project.name}-${project.version}</finalName>
         <defaultGoal>clean package</defaultGoal>
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
 
@@ -96,7 +96,7 @@
         <dependency>
             <groupId>com.github.Slimefun</groupId>
             <artifactId>Slimefun4</artifactId>
-            <version>RC-27</version>
+            <version>RC-30</version>
             <scope>provided</scope>
         </dependency>
 
