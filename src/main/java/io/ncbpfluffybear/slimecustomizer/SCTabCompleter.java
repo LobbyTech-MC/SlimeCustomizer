@@ -1,23 +1,22 @@
 package io.ncbpfluffybear.slimecustomizer;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
+import io.ncbpfluffybear.slimecustomizer.objects.CustomGenerator;
+import io.ncbpfluffybear.slimecustomizer.objects.CustomMachine;
+import io.ncbpfluffybear.slimecustomizer.objects.CustomSCItem;
+import io.ncbpfluffybear.slimecustomizer.objects.WindowsExplorerStringComparator;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
-import io.github.thebusybiscuit.slimefun4.implementation.SlimefunPlugin;
-import io.ncbpfluffybear.slimecustomizer.objects.CustomGenerator;
-import io.ncbpfluffybear.slimecustomizer.objects.CustomMachine;
-import io.ncbpfluffybear.slimecustomizer.objects.CustomSCItem;
-import io.ncbpfluffybear.slimecustomizer.objects.WindowsExplorerStringComparator;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * The {@link SCTabCompleter} serves as a {@link TabCompleter}
@@ -77,7 +76,7 @@ public class SCTabCompleter implements TabCompleter {
     }
 
     private List<String> getSCItems() {
-        List<SlimefunItem> items = SlimefunPlugin.getRegistry().getEnabledSlimefunItems();
+        List<SlimefunItem> items = Slimefun.getRegistry().getEnabledSlimefunItems();
         List<String> list = new ArrayList<>(items.size());
 
         for (SlimefunItem item : items) {

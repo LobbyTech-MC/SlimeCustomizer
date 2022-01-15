@@ -1,11 +1,10 @@
 package io.ncbpfluffybear.slimecustomizer.objects;
 
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
 import org.bukkit.inventory.ItemStack;
-
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.Category;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
 
 /**
  * The {@link CustomSCItem} class is a wrapper
@@ -15,11 +14,11 @@ import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
  */
 public class CustomSCItem extends SlimefunItem {
 
-    public CustomSCItem(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, ItemStack output) {
+    public CustomSCItem(ItemGroup category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe, ItemStack output) {
         super(category, item, recipeType, recipe, output);
     }
 
-    public CustomSCItem(Category category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
+    public CustomSCItem(ItemGroup category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(category, item, recipeType, recipe);
     }
 }

@@ -1,13 +1,14 @@
 package io.ncbpfluffybear.slimecustomizer.registration;
 
+import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 import io.ncbpfluffybear.slimecustomizer.SlimeCustomizer;
 import io.ncbpfluffybear.slimecustomizer.Utils;
 import io.ncbpfluffybear.slimecustomizer.objects.CustomSCItem;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.Category;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
-import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
-import me.mrCookieSlime.Slimefun.cscorelib2.skull.SkullItem;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.config.Config;
+import io.ncbpfluffybear.slimecustomizer.objects.NPCustomSCItem;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -31,13 +32,17 @@ public class Items {
                     "Did you forget to set up the plugin?");
             }
 
+            // Update config for new "placeable" option
+            Utils.updatePlaceableOption(items, itemKey);
+
             String itemType = items.getString(itemKey + ".item-type");
             String materialString = items.getString(itemKey + ".item-id").toUpperCase();
             SlimefunItemStack tempStack;
             ItemStack item = null;
             int amount;
+            boolean placeable = items.getBoolean(itemKey + ".placeable");
 
-            Category category = Utils.getCategory(items.getString(itemKey + ".category"), itemKey);
+            ItemGroup category = Utils.getCategory(items.getString(itemKey + ".category"), itemKey);
             if (category == null) {return false;}
 
             try {
@@ -46,7 +51,6 @@ public class Items {
                 Utils.disable("The item-amount for " + itemKey + " must be a positive integer!");
                 return false;
             }
-
 
             if (itemType.equalsIgnoreCase("CUSTOM")) {
 
@@ -59,7 +63,7 @@ public class Items {
                 } else if (material != null) {
                     item = new ItemStack(material);
                 } else if (materialString.startsWith("SKULL")) {
-                    item = SkullItem.fromHash(materialString.replace("SKULL", ""));
+                    item = SlimefunUtils.getCustomHead(materialString.replace("SKULL", ""));
                 }
 
                 item.setAmount(amount);
@@ -95,12 +99,22 @@ public class Items {
             ItemStack[] recipe = Utils.buildCraftingRecipe(items, itemKey, recipeType);
             if (recipe == null) {return false;}
 
-            if (itemType.equalsIgnoreCase("CUSTOM")) {
-                new CustomSCItem(category, tempStack, recipeType, recipe
-                ).register(SlimeCustomizer.getInstance());
+            if (placeable) {
+                if (itemType.equalsIgnoreCase("CUSTOM")) {
+                    new CustomSCItem(category, tempStack, recipeType, recipe
+                    ).register(SlimeCustomizer.getInstance());
+                } else {
+                    new CustomSCItem(category, tempStack, recipeType, recipe, item
+                    ).register(SlimeCustomizer.getInstance());
+                }
             } else {
-                new CustomSCItem(category, tempStack, recipeType, recipe, item
-                ).register(SlimeCustomizer.getInstance());
+                if (itemType.equalsIgnoreCase("CUSTOM")) {
+                    new NPCustomSCItem(category, tempStack, recipeType, recipe
+                    ).register(SlimeCustomizer.getInstance());
+                } else {
+                    new NPCustomSCItem(category, tempStack, recipeType, recipe, item
+                    ).register(SlimeCustomizer.getInstance());
+                }
             }
 
             Utils.notify("Item " + itemKey + " has been registered!");

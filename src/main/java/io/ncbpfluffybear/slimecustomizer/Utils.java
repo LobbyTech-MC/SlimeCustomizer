@@ -1,12 +1,12 @@
 package io.ncbpfluffybear.slimecustomizer;
 
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.Category;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.cscorelib2.collections.Pair;
-import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
-import me.mrCookieSlime.Slimefun.cscorelib2.item.CustomItem;
-import me.mrCookieSlime.Slimefun.cscorelib2.skull.SkullItem;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.collections.Pair;
+import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.config.Config;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.items.CustomItemStack;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -122,13 +122,13 @@ public class Utils {
                     recipe[i] = new ItemStack(vanillaMat, amount);
                 }
             } else if (type.equalsIgnoreCase("SLIMEFUN")) {
-                SlimefunItem sfMat = SlimefunItem.getByID(material);
+                SlimefunItem sfMat = SlimefunItem.getById(material);
                 if (sfMat == null) {
                     Utils.disable("Crafting ingredient " + configIndex + " for " + key
                         + " is not a valid Slimefun ID!");
                     return null;
                 } else {
-                    recipe[i] = new CustomItem(sfMat.getItem().clone(), amount);
+                    recipe[i] = new CustomItemStack(sfMat.getItem().clone(), amount);
                 }
             } else if (type.equalsIgnoreCase("SAVEDITEM")) {
                 recipe[i] = retrieveSavedItem(material, amount, true);
@@ -153,7 +153,9 @@ public class Utils {
             return null;
         }
 
-        SlimeCustomizer.existingRecipes.put(recipe, new Pair<>(recipeType, key));
+        if (!(recipeType == RecipeType.NULL)) {
+            SlimeCustomizer.existingRecipes.put(recipe, new Pair<>(recipeType, key));
+        }
         return recipe;
     }
 
@@ -172,7 +174,7 @@ public class Utils {
         } else if (material != null && material.isBlock()) {
             block = new ItemStack(material);
         } else if (materialString.startsWith("SKULL")) {
-            block = SkullItem.fromHash(materialString.replace("SKULL", ""));
+            block = SlimefunUtils.getCustomHead(materialString.replace("SKULL", ""));
         }
 
         return block;
@@ -181,8 +183,7 @@ public class Utils {
     public static void updateLoreFormat(Config config, String key, String machineType) {
         String path = key + "." + machineType + "-lore";
         if (config.getStringList(path).toString().equals("[]")) {
-            Bukkit.getLogger().log(Level.WARNING, "Your " + key + " was using the old lore system! Attempting to " +
-                "reformat it now... " +
+            Bukkit.getLogger().log(Level.WARNING, "Your " + key + " was reformatted to use the new lore system!" +
                 "Read " + Links.ADDING_YOUR_ITEM + " to learn how to use multiline lore!");
 
             String lore = config.getString(path);
@@ -248,13 +249,26 @@ public class Utils {
                     config.setValue(transportPath + ".2.id", "N/A");
                     config.setValue(transportPath + ".2.amount", 1);
 
-                    Bukkit.getLogger().log(Level.WARNING, "Your " + key + " was using the old input/output system! " +
-                        "Attempting to reformat it now... " +
+                    Bukkit.getLogger().log(Level.WARNING, "Your " + key + " was reformatted to use the new " +
+                            "input/output system! " +
                         "Read " + Links.ADDING_YOUR_MACHINE + " to learn what this new format does!");
                 }
             }
         }
 
+        config.save();
+    }
+
+    public static void updatePlaceableOption(Config config, String key) {
+        if (config.getValue(key + ".placeable") != null) {
+            return;
+        }
+
+        config.setValue(key + ".placeable", false);
+        Bukkit.getLogger().log(Level.WARNING, "Your " + key + " was reformatted to have a placeable option! " +
+                "Read " + Links.ADDING_YOUR_ITEM + " to learn what this new option does!");
+        Bukkit.getLogger().log(Level.SEVERE, "This option is false by default, so if you have a block you need " +
+                "to be placeable, change this immediately!");
         config.save();
     }
 
@@ -305,8 +319,8 @@ public class Utils {
         }
     }
 
-    public static Category getCategory(String str, String key) {
-        Category category = SlimeCustomizer.allCategories.get(str);
+    public static ItemGroup getCategory(String str, String key) {
+        ItemGroup category = SlimeCustomizer.allCategories.get(str);
         if (category == null) {
             disable(str + " is not a valid category for " + key + "!");
         }
@@ -314,7 +328,7 @@ public class Utils {
     }
 
     public static String capitalize(String str) {
-        return str.substring(0, 1).toUpperCase() + str.substring(1);
+        return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
     }
 
     public static String toOrdinal(int i) {

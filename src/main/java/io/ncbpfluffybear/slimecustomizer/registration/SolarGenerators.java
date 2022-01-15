@@ -3,17 +3,11 @@ package io.ncbpfluffybear.slimecustomizer.registration;
 import dev.j3fftw.extrautils.utils.LoreBuilderDynamic;
 import io.ncbpfluffybear.slimecustomizer.SlimeCustomizer;
 import io.ncbpfluffybear.slimecustomizer.Utils;
-import io.ncbpfluffybear.slimecustomizer.objects.CustomGenerator;
 import io.ncbpfluffybear.slimecustomizer.objects.CustomSolarGenerator;
-import io.ncbpfluffybear.slimecustomizer.objects.SCMachine;
-import me.mrCookieSlime.Slimefun.Lists.RecipeType;
-import me.mrCookieSlime.Slimefun.Objects.Category;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineFuel;
-import me.mrCookieSlime.Slimefun.api.SlimefunItemStack;
-import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
-import me.mrCookieSlime.Slimefun.cscorelib2.skull.SkullItem;
-import org.bukkit.Material;
+import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.config.Config;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -45,7 +39,7 @@ public class SolarGenerators {
             ItemStack item;
             SlimefunItemStack tempStack;
 
-            Category category = Utils.getCategory(generators.getString(generatorKey + ".category"), generatorKey);
+            ItemGroup category = Utils.getCategory(generators.getString(generatorKey + ".category"), generatorKey);
             if (category == null) {return false;}
 
             // Day time energy rate

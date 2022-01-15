@@ -1,20 +1,19 @@
 package io.ncbpfluffybear.slimecustomizer.registration;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-
-import org.bukkit.Material;
-import org.bukkit.inventory.ItemStack;
-
+import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.ncbpfluffybear.slimecustomizer.SlimeCustomizer;
 import io.ncbpfluffybear.slimecustomizer.Utils;
 import io.ncbpfluffybear.slimecustomizer.objects.CustomGenerator;
 import io.ncbpfluffybear.slimecustomizer.objects.SCMachine;
-import me.mrCookieSlime.Slimefun.Objects.Category;
-import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.abstractItems.MachineFuel;
-import me.mrCookieSlime.Slimefun.cscorelib2.config.Config;
+import io.github.thebusybiscuit.slimefun4.libraries.dough.config.Config;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
 
 /**
  * {@link Generators} registers the generators
@@ -36,7 +35,7 @@ public class Generators {
             SCMachine generator = new SCMachine(generators, generatorKey, "generator");
             if (!generator.isValid()) {return false;}
 
-            Category category = Utils.getCategory(generators.getString(generatorKey + ".category"), generatorKey);
+            ItemGroup category = Utils.getCategory(generators.getString(generatorKey + ".category"), generatorKey);
             if (category == null) {return false;}
 
             /* Generator recipes */
@@ -118,7 +117,7 @@ public class Generators {
                             }
                         }
                     } else if (type.equalsIgnoreCase("SLIMEFUN")) {
-                        SlimefunItem sfMat = SlimefunItem.getByID(material);
+                        SlimefunItem sfMat = SlimefunItem.getById(material);
                         if (sfMat == null) {
                             Utils.disable("The " + slot + " ingredient for recipe" + recipeKey + " for " + generatorKey
                                 + " is not a valid Slimefun ID!");
