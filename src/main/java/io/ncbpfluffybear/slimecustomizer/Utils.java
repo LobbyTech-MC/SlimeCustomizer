@@ -376,6 +376,7 @@ public class Utils {
     }
 
     public static boolean isKeyed(ItemStack item) {
+    	if (item.getItemMeta() == null) return false;
         return item.getItemMeta().getPersistentDataContainer().has(SCKEY, PersistentDataType.INTEGER);
     }
 
